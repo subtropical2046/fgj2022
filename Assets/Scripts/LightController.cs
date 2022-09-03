@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using CharacterControl;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using DG.Tweening;
 
 public class LightController : MonoBehaviour
 {
+    [SerializeField] private CharacterControlManager _characterControlManager;
     [SerializeField] private float _decideRandomMoveInterval = default;
     [SerializeField] private int _randomMoveRate = default;
     [SerializeField] private float _randomMoveSpeed = default;
@@ -25,6 +28,11 @@ public class LightController : MonoBehaviour
         StartCoroutine(DecideRandomMove());
     }
 
+    private void FixedUpdate()
+    {
+        transform.position += (Vector3)_characterControlManager.GetDeltaPosition(Time.deltaTime);
+    }
+
     private IEnumerator DecideRandomMove()
     {
         while (_keepRandomMove)
@@ -32,7 +40,7 @@ public class LightController : MonoBehaviour
             yield return new WaitForSeconds(_decideRandomMoveInterval);
             if (Random.Range(1, 101) <= _randomMoveRate)
             {
-                //move light transform to random place
+                transform.DOMove(GetRandomMovePosition(), _randomMoveSpeed);
             }
         }
     }
@@ -48,5 +56,12 @@ public class LightController : MonoBehaviour
                 //PlayGetAttractionAnimation(collision.transform);
             }
         }
+    }
+
+    private Vector2 GetRandomMovePosition()
+    {
+        int x = Random.Range(-9, 10);
+        int y = Random.Range(-5, 6);
+        return new Vector2(x, y);
     }
 }
