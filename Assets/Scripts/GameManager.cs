@@ -2,7 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -23,12 +24,6 @@ public class GameManager : MonoBehaviour
             OnGameStageChanged?.Invoke(value);
         }
     }
-    [SerializeField] GameObject timeCounter = null;
-    [SerializeField] Text timeCounterText = null;
-
-    [SerializeField] float timeLimit = 120f;
-
-    float timeRemaining = 0f;
 
 
     private void Awake()
@@ -41,47 +36,15 @@ public class GameManager : MonoBehaviour
         Stage = GameStage.Start;
     }
 
-    private void Update()
-    {
-        if(Stage != GameStage.Play)
-        {
-            timeCounter.gameObject.SetActive(false);
-            return;
-        }
-
-        if(!timeCounter.gameObject.activeSelf)
-        {
-            timeCounter.gameObject.SetActive(true);
-        }
-
-        timeRemaining -= Time.deltaTime;
-        timeCounterText.text = Mathf.RoundToInt(timeRemaining).ToString();
-
-        if(timeRemaining <= 0f)
-        {
-            Stage = GameStage.Lose;
-        }
-    }
 
     public void CheatWin()
     {
         Stage = GameStage.Win;
     }
 
-
-    #region ButtonCall
-    public void PlayGame()
+    public void ReloadScene()
     {
-        timeRemaining = timeLimit;
-        Stage = GameStage.Play;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void ExitGame()
-    {
-        if (Stage == GameStage.Start)
-            Application.Quit();
-        else
-            Stage = GameStage.Start;
-    }
-    #endregion
 }

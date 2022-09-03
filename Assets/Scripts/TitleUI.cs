@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,9 @@ using UnityEngine.UI;
 public class TitleUI : MonoBehaviour
 {
     [SerializeField] GameObject mainUI = null;
+    [SerializeField] Button playBtn = null;
     [SerializeField] Text playBtnText = null;
+    [SerializeField] Button endBtn = null;
     [SerializeField] Text exitBtnText = null;
 
     [SerializeField] Text titleText = null;
@@ -15,7 +18,37 @@ public class TitleUI : MonoBehaviour
     {
         mainUI.SetActive(true);
         GameManager.Instance.OnGameStageChanged += ChangeStage;
+        playBtn.onClick.AddListener(PlayGame);
+        endBtn.onClick.AddListener(EndGame);
     }
+
+    private void PlayGame()
+    {
+        if (GameManager.Instance.Stage == GameStage.Start)
+        {
+            GameManager.Instance.Stage = GameStage.Play;
+        }
+        else
+        {
+            //GameManager.Instance.Stage = GameStage.Start;
+            GameManager.Instance.ReloadScene();
+        }
+    }
+
+    private void EndGame()
+    {
+        if(GameManager.Instance.Stage == GameStage.Start)
+        {
+            Application.Quit();
+        }
+        else
+        {
+            GameManager.Instance.ReloadScene();
+        }
+        
+    }
+
+
 
     private void ChangeStage(GameStage stage)
     {
