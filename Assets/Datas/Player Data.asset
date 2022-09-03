@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d42e99df84cf8c24fb2e4476f02ede69, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 9b83b59b6a67997479d46035b882a5e8, type: 3}
+  m_Name: Player Data
   m_EditorClassIdentifier: 
-  _movingVelocity: 3
-  _movingAccelTime: 0.1
+  _drunkControlData:
+    _checkingPeriod: 1
+    _ratio: 100
+    _period: 2
+    _movingVelocity: 2

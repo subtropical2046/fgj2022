@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 1680737105}
   - component: {fileID: 1680737107}
   m_Layer: 0
-  m_Name: Character
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,8 +330,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1749c3b4f0e72684d80f529d3850b848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: dc2a437938a5dc745bec4dd3b9fee707, type: 2}
   _characterControlManager: {fileID: 1680737103}
   _rigidbody: {fileID: 1680737106}
+  _spriteRenderer: {fileID: 1680737101}
 --- !u!1 &1863221718
 GameObject:
   m_ObjectHideFlags: 0
