@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
         }
         set
         {
-            Debug.Log("Stage : " + value);
             currentStage = value;
             OnGameStageChanged?.Invoke(value);
         }
@@ -28,9 +27,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text timeCounterText = null;
 
     [SerializeField] float timeLimit = 120f;
-
-
-    public event Action<bool> OnStopPlaying;
 
     float timeRemaining = 0f;
 
@@ -67,7 +63,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Win()
+    public void CheatWin()
     {
         Stage = GameStage.Win;
     }
