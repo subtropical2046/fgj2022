@@ -1,6 +1,5 @@
 ﻿using CharacterControl;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using DG.Tweening;
@@ -8,23 +7,18 @@ using DG.Tweening;
 public class LightController : MonoBehaviour
 {
     [SerializeField] private CharacterControlManager _characterControlManager;
+    [SerializeField] private Transform _playerTransform;
+
+    [Header("Adjustable Value")]
+    [SerializeField] private bool _TunrOnOffRandomMove;
     [SerializeField] private float _decideRandomMoveInterval = default;
     [SerializeField] private int _randomMoveRate = default;
     [SerializeField] private float _randomMoveSpeed = default;
-
-    private LightState _currentState;
-    private bool _keepRandomMove;
-    private enum LightState
-    {
-        InPlayerControl,
-        RandomMove,
-        Attracted
-    }
+    [SerializeField] private float _attractedMoveSpeed = default;
     
     private void Start()
     {
-        _currentState = LightState.InPlayerControl;
-        _keepRandomMove = true;
+        _TunrOnOffRandomMove = true;
         StartCoroutine(DecideRandomMove());
     }
 
@@ -35,12 +29,12 @@ public class LightController : MonoBehaviour
 
     private IEnumerator DecideRandomMove()
     {
-        while (_keepRandomMove)
+        while (_TunrOnOffRandomMove)
         {
             yield return new WaitForSeconds(_decideRandomMoveInterval);
             if (Random.Range(1, 101) <= _randomMoveRate)
             {
-                transform.DOMove(GetRandomMovePosition(), _randomMoveSpeed);
+                var TweenInProgress = transform.DOMove(GetRandomMovePosition(), _randomMoveSpeed);
             }
         }
     }
@@ -48,13 +42,11 @@ public class LightController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //暫定tag為Attractor
-        if (collision.CompareTag("Attractor"))
+        if (collision.CompareTag("Finish"))
         {
-            if (!(_currentState == LightState.Attracted))
-            {
-                //move light transform to target transform
-                //PlayGetAttractionAnimation(collision.transform);
-            }
+            Debug.Log("OnTriggerEnter2D");
+            DOTween.KillAll();
+            transform.DOMove(collision.transform.position, _attractedMoveSpeed);
         }
     }
 
@@ -62,6 +54,7 @@ public class LightController : MonoBehaviour
     {
         int x = Random.Range(-9, 10);
         int y = Random.Range(-5, 6);
-        return new Vector2(x, y);
+        Vector2 returnPos = (Vector2)_playerTransform.position + new Vector2(x, y);
+        return returnPos;
     }
 }
