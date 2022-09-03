@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 7894681154027143865}
   - component: {fileID: 3632690589040946427}
   m_Layer: 5
-  m_Name: StageUI
+  m_Name: TitleUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
