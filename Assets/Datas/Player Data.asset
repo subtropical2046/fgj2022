@@ -20,3 +20,5 @@ MonoBehaviour:
     _fallPeriod: 0.5
     _fallDistance: 3
     _fallIdlePeriod: 1
+  _stuckControlData:
+    _stuckPeriod: 1

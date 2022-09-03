@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
         Idle,
         Walking,
         Drunk,
-        Fall
+        Fall,
+        Stuck
     }
 
     #endregion
@@ -49,6 +50,8 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("SmallObstacle"))
             OnFall();
+        else if (other.CompareTag("Attractor"))
+            OnAttracted();
     }
 
     private void OnGameStageChanged(GameStage gameStage)
@@ -75,7 +78,7 @@ public class Player : MonoBehaviour
 
     private void OnFall()
     {
-        _state = State.Fall;
+        ChangeState(State.Fall);
 
         var curPosition = _rigidbody.position;
 
@@ -87,7 +90,17 @@ public class Player : MonoBehaviour
                     _data.FallControlData.FallDistance,
                     _data.FallControlData.FallPeriod))
             .AppendInterval(_data.FallControlData.FallIdlePeriod)
-            .OnComplete(() => _state = State.Walking);
+            .SetUpdate(UpdateType.Fixed)
+            .OnComplete(() => ChangeState(State.Walking));
+    }
+
+    private void OnAttracted()
+    {
+        ChangeState(State.Stuck);
+
+        DOTween.Sequence()
+            .AppendInterval(_data.StuckControlData.StuckPeriod)
+            .OnComplete(() => ChangeState(State.Walking));
     }
 
     private void FixedUpdate()
