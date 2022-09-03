@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42e99df84cf8c24fb2e4476f02ede69, type: 3}
   m_Name: Light
   m_EditorClassIdentifier: 
-  _movingVelocity: 2
+  _movingVelocity: 4
   _movingAccelTime: 0.1

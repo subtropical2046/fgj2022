@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Player Data
   m_EditorClassIdentifier: 
   _drunkControlData:
-    _checkingPeriod: 1
-    _ratio: 100
-    _period: 2
-    _movingVelocity: 2
+    _checkingPeriod: 5
+    _ratio: 30
+    _period: 1
