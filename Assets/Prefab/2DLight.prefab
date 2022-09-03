@@ -189,11 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterControlManager: {fileID: 2931669039361525561}
   _playerTransform: {fileID: 0}
-  _TunrOnOffRandomMove: 1
-  _decideRandomMoveInterval: 3
-  _randomMoveRate: 100
-  _randomMoveSpeed: 1
-  _attractedMoveSpeed: 1
+  lightControllerData: {fileID: 11400000, guid: d209b3d95b4d29240bca7ba21681e7a3, type: 2}
 --- !u!50 &2122009387
 Rigidbody2D:
   serializedVersion: 4

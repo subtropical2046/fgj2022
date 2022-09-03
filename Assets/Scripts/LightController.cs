@@ -9,16 +9,12 @@ public class LightController : MonoBehaviour
     [SerializeField] private CharacterControlManager _characterControlManager;
     [SerializeField] private Transform _playerTransform;
 
-    [Header("Adjustable Value")]
-    [SerializeField] private bool _TunrOnOffRandomMove = default;
-    [SerializeField] private float _decideRandomMoveInterval = default;
-    [SerializeField] private int _randomMoveRate = default;
-    [SerializeField] private float _randomMoveSpeed = default;
-    [SerializeField] private float _attractedMoveSpeed = default;
-    
+    [SerializeField] LightControllerData lightControllerData;
+
+
     private void Start()
     {
-        _TunrOnOffRandomMove = true;
+        lightControllerData._tunrOnOffRandomMove = true;
         StartCoroutine(DecideRandomMove());
     }
 
@@ -29,12 +25,12 @@ public class LightController : MonoBehaviour
 
     private IEnumerator DecideRandomMove()
     {
-        while (_TunrOnOffRandomMove)
+        while (lightControllerData._tunrOnOffRandomMove)
         {
-            yield return new WaitForSeconds(_decideRandomMoveInterval);
-            if (Random.Range(1, 101) <= _randomMoveRate)
+            yield return new WaitForSeconds(lightControllerData._decideRandomMoveInterval);
+            if (Random.Range(1, 101) <= lightControllerData._randomMoveRate)
             {
-                transform.DOMove(GetRandomMovePosition(), _randomMoveSpeed);
+                transform.DOMove(GetRandomMovePosition(), lightControllerData._randomMoveSpeed);
             }
         }
     }
@@ -46,7 +42,7 @@ public class LightController : MonoBehaviour
         {
             Debug.Log("OnTriggerEnter2D");
             DOTween.KillAll();
-            transform.DOMove(collision.transform.position, _attractedMoveSpeed);
+            transform.DOMove(collision.transform.position, lightControllerData._attractedMoveSpeed);
         }
     }
 
