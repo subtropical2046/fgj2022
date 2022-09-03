@@ -39,11 +39,9 @@ namespace CharacterControl
 
         #endregion
 
-        private void FixedUpdate()
+        public Vector2 GetDeltaPosition(float deltaTime)
         {
-            transform.localPosition +=
-                (Vector3)_smoothMove.GetDeltaMovement(
-                    _movingDirection, Time.deltaTime);
+            return _smoothMove.GetDeltaMovement(_movingDirection, deltaTime);
         }
     }
 }
