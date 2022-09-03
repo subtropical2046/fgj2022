@@ -16,3 +16,7 @@ MonoBehaviour:
     _checkingPeriod: 5
     _ratio: 30
     _period: 1
+  _fallControlData:
+    _fallPeriod: 0.5
+    _fallDistance: 3
+    _fallIdlePeriod: 1
