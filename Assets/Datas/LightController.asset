@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b83b59b6a67997479d46035b882a5e8, type: 3}
-  m_Name: Player Data
+  m_Script: {fileID: 11500000, guid: a93d180e34a7c784abd17cc218ea4644, type: 3}
+  m_Name: LightController
   m_EditorClassIdentifier: 
-  _drunkControlData:
-    _checkingPeriod: 5
-    _ratio: 30
-    _period: 1
-  _fallControlData:
-    _fallPeriod: 0.5
-    _fallDistance: 3
-    _fallIdlePeriod: 1
+  _tunrOnOffRandomMove: 1
+  _decideRandomMoveInterval: 10
+  _randomMoveRate: 50
+  _randomMoveSpeed: 2
+  _attractedMoveSpeed: 2

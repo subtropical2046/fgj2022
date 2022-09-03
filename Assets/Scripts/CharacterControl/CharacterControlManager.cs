@@ -16,10 +16,15 @@ namespace CharacterControl
 
         #endregion
 
+        #region Public Properties
+
+        public Vector2 MovingDirection { get; private set; }
+
+        #endregion
+
         #region Private Members
 
         private SmoothMove _smoothMove;
-        private Vector2 _movingDirection;
 
         #endregion
 
@@ -34,14 +39,14 @@ namespace CharacterControl
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            _movingDirection = context.ReadValue<Vector2>();
+            MovingDirection = context.ReadValue<Vector2>();
         }
 
         #endregion
 
         public Vector2 GetDeltaPosition(float deltaTime)
         {
-            return _smoothMove.GetDeltaMovement(_movingDirection, deltaTime);
+            return _smoothMove.GetDeltaMovement(MovingDirection, deltaTime);
         }
     }
 }
