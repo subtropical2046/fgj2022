@@ -1,6 +1,6 @@
 using CharacterControl;
 using DG.Tweening;
-using DrunkControl;
+using PlayerControl;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]

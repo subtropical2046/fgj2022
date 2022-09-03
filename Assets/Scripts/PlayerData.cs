@@ -1,5 +1,4 @@
-using DrunkControl;
-using FallControl;
+using PlayerControl;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Player Data")]

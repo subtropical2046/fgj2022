@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace DrunkControl
+namespace PlayerControl
 {
     public class DrunkControlCore
     {

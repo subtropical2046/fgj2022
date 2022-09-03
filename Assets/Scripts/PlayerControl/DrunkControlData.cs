@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace DrunkControl
+namespace PlayerControl
 {
     [Serializable]
     public class DrunkControlData

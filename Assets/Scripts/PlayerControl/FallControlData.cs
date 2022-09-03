@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace FallControl
+namespace PlayerControl
 {
     [Serializable]
     public class FallControlData
