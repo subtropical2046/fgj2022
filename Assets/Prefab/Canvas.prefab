@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeCounter: {fileID: 3309688616677956865}
   timeCounterText: {fileID: 3309688616717335326}
-  timeLimit: 120
+  timeLimit: 5
 --- !u!1001 &7737430830999720113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,9 +133,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PlayGame
       objectReference: {fileID: 0}
+    - target: {fileID: 629900487006655550, guid: 32f3d9bf037a8114ea751ba4e25fd70c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 796842570956931390, guid: 32f3d9bf037a8114ea751ba4e25fd70c, type: 3}
       propertyPath: m_Name
-      value: StageUI
+      value: TitleUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 796842570956931390, guid: 32f3d9bf037a8114ea751ba4e25fd70c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4293682717788616139, guid: 32f3d9bf037a8114ea751ba4e25fd70c, type: 3}
       propertyPath: m_Pivot.x
