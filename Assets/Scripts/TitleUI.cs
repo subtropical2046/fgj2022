@@ -13,6 +13,7 @@ public class TitleUI : MonoBehaviour
     [SerializeField] Text exitBtnText = null;
 
     [SerializeField] Text titleText = null;
+    [SerializeField] GameObject mapQR = null;
 
     private void Start()
     {
@@ -53,6 +54,7 @@ public class TitleUI : MonoBehaviour
     private void ChangeStage(GameStage stage)
     {
         gameObject.SetActive(stage != GameStage.Play);
+        mapQR.SetActive(stage == GameStage.Start);
         switch (stage)
         {
             case GameStage.Start:
