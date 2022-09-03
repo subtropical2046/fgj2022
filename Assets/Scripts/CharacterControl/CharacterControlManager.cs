@@ -15,9 +15,15 @@ namespace CharacterControl
 
         #region Private Members
 
+        private SmoothMove _smoothMove;
         private Vector2 _movingDirection;
 
         #endregion
+
+        private void Awake()
+        {
+            _smoothMove = new SmoothMove(5, 0.2f);
+        }
 
         #region Input System Event
 
@@ -27,5 +33,12 @@ namespace CharacterControl
         }
 
         #endregion
+
+        private void FixedUpdate()
+        {
+            transform.localPosition +=
+                (Vector3)_smoothMove.GetDeltaMovement(
+                    _movingDirection, Time.deltaTime);
+        }
     }
 }
