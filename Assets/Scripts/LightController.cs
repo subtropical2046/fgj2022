@@ -10,7 +10,7 @@ public class LightController : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
 
     [Header("Adjustable Value")]
-    [SerializeField] private bool _TunrOnOffRandomMove;
+    [SerializeField] private bool _TunrOnOffRandomMove = default;
     [SerializeField] private float _decideRandomMoveInterval = default;
     [SerializeField] private int _randomMoveRate = default;
     [SerializeField] private float _randomMoveSpeed = default;

@@ -569,48 +569,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &2122009380 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2931669039361525562, guid: 0771ab3464c66b54bb3b55d196ddf292, type: 3}
-  m_PrefabInstance: {fileID: 2931669037922176030}
-  m_PrefabAsset: {fileID: 0}
---- !u!58 &2122009386
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122009380}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 6
---- !u!50 &2122009387
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122009380}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &2931669037922176030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -622,14 +580,6 @@ PrefabInstance:
       propertyPath: _playerTransform
       value: 
       objectReference: {fileID: 519420032}
-    - target: {fileID: 2931669039361525559, guid: 0771ab3464c66b54bb3b55d196ddf292, type: 3}
-      propertyPath: _attractedMoveSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2931669039361525559, guid: 0771ab3464c66b54bb3b55d196ddf292, type: 3}
-      propertyPath: _TunrOnOffRandomMove
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2931669039361525560, guid: 0771ab3464c66b54bb3b55d196ddf292, type: 3}
       propertyPath: m_RootOrder
       value: 2
