@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class TitleUI : MonoBehaviour
 {
+    [SerializeField] GameObject mainUI = null;
     [SerializeField] Text playBtnText = null;
     [SerializeField] Text exitBtnText = null;
 
     [SerializeField] Text titleText = null;
 
-
     private void Start()
     {
+        mainUI.SetActive(true);
         GameManager.Instance.OnGameStageChanged += ChangeStage;
     }
 
