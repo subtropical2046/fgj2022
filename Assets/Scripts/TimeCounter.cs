@@ -16,7 +16,7 @@ public class TimeCounter : MonoBehaviour
     void Start()
     {
         GameManager.Instance.OnGameStageChanged += StartCounting;
-        
+        timeRemaining = levelData.TimeLimit;
     }
 
     private void StartCounting(GameStage stage)
