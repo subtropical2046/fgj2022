@@ -34,7 +34,7 @@ public class LightController : MonoBehaviour
             yield return new WaitForSeconds(_decideRandomMoveInterval);
             if (Random.Range(1, 101) <= _randomMoveRate)
             {
-                var TweenInProgress = transform.DOMove(GetRandomMovePosition(), _randomMoveSpeed);
+                transform.DOMove(GetRandomMovePosition(), _randomMoveSpeed);
             }
         }
     }
