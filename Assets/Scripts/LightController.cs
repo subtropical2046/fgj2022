@@ -42,7 +42,7 @@ public class LightController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //暫定tag為Attractor
-        if (collision.CompareTag("Finish"))
+        if (collision.CompareTag("Attractor"))
         {
             Debug.Log("OnTriggerEnter2D");
             DOTween.KillAll();
