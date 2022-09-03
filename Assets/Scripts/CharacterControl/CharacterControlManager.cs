@@ -11,6 +11,9 @@ namespace CharacterControl
     {
         #region Serialized Fields
 
+        [SerializeField]
+        private CharacterControlData _controlData;
+
         #endregion
 
         #region Private Members
@@ -22,7 +25,9 @@ namespace CharacterControl
 
         private void Awake()
         {
-            _smoothMove = new SmoothMove(5, 0.2f);
+            _smoothMove = new SmoothMove(
+                _controlData.MovingVelocity, 
+                _controlData.MovingAccelTime);
         }
 
         #region Input System Event
