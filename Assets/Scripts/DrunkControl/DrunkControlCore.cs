@@ -7,23 +7,36 @@ namespace DrunkControl
 {
     public class DrunkControlCore
     {
+        private readonly MonoBehaviour _targetBehaviour;
         private readonly DrunkControlData _data;
         private readonly Action<bool> _onDrunk;
 
         public bool IsDrunk { get; private set; }
 
-        private MonoBehaviour _targetBehaviour;
+        private Coroutine _coroutine;
 
-        public DrunkControlCore(DrunkControlData data, Action<bool> onDrunk)
+        public DrunkControlCore(
+            MonoBehaviour targetBehaviour,
+            DrunkControlData data, Action<bool> onDrunk)
         {
+            _targetBehaviour = targetBehaviour;
             _data = data;
             _onDrunk = onDrunk;
         }
 
-        public void Start(MonoBehaviour monoBehaviour)
+        public void Start()
         {
-            _targetBehaviour = monoBehaviour;
-            _targetBehaviour.StartCoroutine(DrunkCheckingCoroutine());
+            _coroutine =
+                _targetBehaviour.StartCoroutine(DrunkCheckingCoroutine());
+        }
+
+        public void Stop()
+        {
+            if (_coroutine == null)
+                return;
+
+            _targetBehaviour.StopCoroutine(_coroutine);
+            _coroutine = null;
         }
 
         private IEnumerator DrunkCheckingCoroutine()
