@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   _timeLimit: 45
-  _levelPrefab: {fileID: 5224032016516041144, guid: f286adab56eda324fb8bb6b9e5612769, type: 3}
+  _levelPrefab: {fileID: 5224032016516041144, guid: a94214894a28385459ed984b8860994a, type: 3}
