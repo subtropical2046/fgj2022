@@ -13,7 +13,8 @@ public class LightController : MonoBehaviour
 
     private Light2D _light;
     private float _defaultLightIntensity;
-    private Sequence randomMoveSequence;
+    private Sequence _randomMoveSequence;
+    private bool _turnOnOffRandomMove;
 
     public void OnGameStart()
     {
@@ -24,7 +25,7 @@ public class LightController : MonoBehaviour
     {
         _light = GetComponent<Light2D>();
         _defaultLightIntensity = _light.intensity;
-        lightControllerData._tunrOnOffRandomMove = true;
+        _turnOnOffRandomMove = lightControllerData.TunrOnOffRandomMove;
     }
 
     private void FixedUpdate()
@@ -34,23 +35,28 @@ public class LightController : MonoBehaviour
 
     private IEnumerator DecideRandomMove()
     {
-        while (lightControllerData._tunrOnOffRandomMove)
+        while (true)
         {
-            yield return new WaitForSeconds(lightControllerData._decideRandomMoveInterval);
-            if (Random.Range(1, 101) <= lightControllerData._randomMoveRate)
+            yield return new WaitForSeconds(lightControllerData.DecideRandomMoveInterval);
+            if (RandomRateMeet() && _turnOnOffRandomMove)
             {
-                FlashAndMoveToRandomPos();
+                FlashAndMoveToRandomPosition();
             }
+        }
+
+        bool RandomRateMeet()
+        {
+            return Random.Range(1, 101) <= lightControllerData.RandomMoveRate;
         }
     }
 
-    private void FlashAndMoveToRandomPos()
+    private void FlashAndMoveToRandomPosition()
     {
-        randomMoveSequence = DOTween.Sequence();
+        _randomMoveSequence = DOTween.Sequence();
         Tweener flash = DOTween.To(() => _light.intensity, x => _light.intensity = x, 0.2f, 0.2f).SetLoops(4, LoopType.Yoyo);
-        Tweener move = transform.DOMove(GetRandomMovePosition(), lightControllerData._randomMoveSpeed);
-        randomMoveSequence.Append(flash);
-        randomMoveSequence.Append(move);
+        Tweener move = transform.DOMove(GetRandomMovePosition(), lightControllerData.RandomMoveSpeed);
+        _randomMoveSequence.Append(flash);
+        _randomMoveSequence.Append(move);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -58,9 +64,11 @@ public class LightController : MonoBehaviour
         //暫定tag為Attractor
         if (collision.CompareTag("Attractor"))
         {
-            randomMoveSequence.Kill();
+            _randomMoveSequence.Kill();
+            _turnOnOffRandomMove = false;
             _light.intensity = _defaultLightIntensity;
-            transform.DOMove(collision.transform.position, lightControllerData._attractedMoveSpeed);
+            transform.DOMove(collision.transform.position, lightControllerData.AttractedMoveSpeed)
+                .OnComplete(() => _turnOnOffRandomMove = true);
         }
     }
 
