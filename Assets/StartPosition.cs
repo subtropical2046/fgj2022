@@ -8,22 +8,29 @@ public class StartPosition : MonoBehaviour
     [SerializeField] Transform _light = null;
     void Awake()
     {
-        GameManager.Instance.OnGameStageChanged += StageChanged;
+        //GameManager.Instance.OnGameStageChanged += StageChanged;
     }
 
-    private void StageChanged(GameStage stage)
+    private void Start()
     {
-        
-        if(stage == GameStage.Start)
-        {
-            Vector2 pos = transform.GetChild(Random.Range(0, transform.childCount)).position;
-            _player.position = pos;
-            _light.position = pos;
-        }
+        Vector2 pos = transform.GetChild(Random.Range(0, transform.childCount)).position;
+        _player.position = pos;
+        _light.position = pos;
     }
+
+    //private void StageChanged(GameStage stage)
+    //{
+        
+    //    if(stage == GameStage.Start)
+    //    {
+    //        Vector2 pos = transform.GetChild(Random.Range(0, transform.childCount)).position;
+    //        _player.position = pos;
+    //        _light.position = pos;
+    //    }
+    //}
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnGameStageChanged -= StageChanged;
+        //GameManager.Instance.OnGameStageChanged -= StageChanged;
     }
 }
