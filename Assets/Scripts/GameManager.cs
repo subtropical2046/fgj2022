@@ -26,10 +26,13 @@ public class GameManager : MonoBehaviour
         }
         set
         {
+            PreviousStage = currentStage;
             currentStage = value;
             OnGameStageChanged?.Invoke(value);
         }
     }
+
+    public GameStage PreviousStage { get; private set; }
 
 
     private void Awake()
@@ -43,7 +46,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void CheatWin()
+    public void Win()
     {
         Stage = GameStage.Win;
     }

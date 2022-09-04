@@ -31,8 +31,8 @@ public class TitleUI : MonoBehaviour
         }
         else
         {
-            //GameManager.Instance.Stage = GameStage.Start;
-            GameManager.Instance.ReloadScene();
+            GameManager.Instance.Stage = GameStage.Start;
+            //GameManager.Instance.ReloadScene();
         }
     }
 
@@ -44,7 +44,8 @@ public class TitleUI : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.ReloadScene();
+            //GameManager.Instance.ReloadScene();
+            GameManager.Instance.Stage = GameStage.Start;
         }
         
     }
@@ -73,7 +74,7 @@ public class TitleUI : MonoBehaviour
                 titleText.color = Color.red;
                 break;
             case GameStage.Win:
-                playBtnText.text = "Restart";
+                playBtnText.text = "Next Level";
                 exitBtnText.text = "MainMenu";
                 titleText.text = "You Win";
                 titleText.color = Color.green;
