@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0b894f907007940bf6baa028ae4b0c, type: 3}
   m_Name: Blocker Data
   m_EditorClassIdentifier: 
-  _animationSprite1: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  _animationSprite2: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  _blockSprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  _animationSprite1: {fileID: 21300000, guid: deebac7778be90747be1269ef381c586, type: 3}
+  _animationSprite2: {fileID: 21300000, guid: 202311d6b2bd9894290883f5ed8aa25b, type: 3}
+  _blockSprite: {fileID: 21300000, guid: b4fd7ce8b4c2f3e42811bb462cace33e, type: 3}
   _moveSpeed: 2
   _animationSpriteSwapSpeed: 0.2

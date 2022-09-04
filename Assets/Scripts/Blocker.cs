@@ -41,6 +41,7 @@ public class Blocker : MonoBehaviour
             _spriteRenderer.sprite = _blockerData.AnimationSprite1;
             yield return new WaitForSeconds(_blockerData.AnimationSpriteSwapSpeed);
             _spriteRenderer.sprite = _blockerData.AnimationSprite2;
+            yield return new WaitForSeconds(_blockerData.AnimationSpriteSwapSpeed);
         }
     }
 
