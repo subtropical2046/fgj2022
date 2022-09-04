@@ -263,7 +263,10 @@ public enum Sound
     StartUp,
     LightMove,
     Beauty,
-    Whistle
+    Whistle,
+    Fall,
+    Drunk,
+    Monster
 }
 
 public enum Music

@@ -85,11 +85,13 @@ public class Player : MonoBehaviour, IPlayerSpriteControlTarget
         ChangeState(isDrunk ? State.Drunk : State.Walking);
         // TODO Change to animation control
         _spriteRenderer.DOColor(isDrunk ? Color.red : Color.white, 0.2f);
+        SoundManager.Instance.Play(Sound.Drunk,2f);
     }
 
     private void OnFall()
     {
         ChangeState(State.Fall);
+        SoundManager.Instance.Play(Sound.Fall,1f);
 
         var curPosition = _rigidbody.position;
         var movingDirection = _characterControlManager.MovingDirection;
