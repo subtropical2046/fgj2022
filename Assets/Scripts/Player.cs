@@ -31,6 +31,8 @@ public class Player : MonoBehaviour, IPlayerSpriteControlTarget
     private Animator _animator;
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
+    [SerializeField]
+    private CameraShake _cameraShake;
 
     #endregion
 
@@ -90,6 +92,8 @@ public class Player : MonoBehaviour, IPlayerSpriteControlTarget
         ChangeState(State.Fall);
 
         var curPosition = _rigidbody.position;
+
+        _cameraShake.StartShake();
 
         DOTween.Sequence()
             .Append(
