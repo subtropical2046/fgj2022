@@ -4,28 +4,21 @@ using DG.Tweening;
 
 public class Blocker : MonoBehaviour
 {
-    [Header("SpriteSet")]
-    [SerializeField] private Sprite _animationSprite1;
-    [SerializeField] private Sprite _animationSprite2;
-    [SerializeField] private Sprite _blockSprite;
-    [Header("BlockDestination")]
-    [SerializeField] private Transform _destination;
-    [Header("Adjustable Values")]
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _animationSpriteSwapSpeed;
+    [SerializeField] private BlockerData _blockerData;
 
     private SpriteRenderer _spriteRenderer;
     private bool _triggered = false;
+    private Vector2 _playerPos;
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.flipX = (transform.position.x >= _destination.position.x);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!_triggered && collision.CompareTag("Player"))
         {
+            _playerPos = collision.gameObject.transform.position;
             _triggered = true;
             DoBlock();
         }
@@ -36,24 +29,25 @@ public class Blocker : MonoBehaviour
         // Play Move Animation
         StartCoroutine(PlayMoveAnimation());
         // Move GameObject
-        transform.DOMove(_destination.position, _moveSpeed)
+        transform.DOMove(_playerPos, _blockerData.MoveSpeed)
             .OnComplete(() => OnDoBlockComplete());
     }
 
     private IEnumerator PlayMoveAnimation()
     {
+        _spriteRenderer.flipX = (transform.position.x <= _playerPos.x);
         while (true)
         {
-            _spriteRenderer.sprite = _animationSprite1;
-            yield return new WaitForSeconds(_animationSpriteSwapSpeed);
-            _spriteRenderer.sprite = _animationSprite2;
+            _spriteRenderer.sprite = _blockerData.AnimationSprite1;
+            yield return new WaitForSeconds(_blockerData.AnimationSpriteSwapSpeed);
+            _spriteRenderer.sprite = _blockerData.AnimationSprite2;
         }
     }
 
     private void OnDoBlockComplete()
     {
         StopAllCoroutines();
-        _spriteRenderer.sprite = _blockSprite;
+        _spriteRenderer.sprite = _blockerData.BlockSprite;
         this.enabled = false;
     }
 }
