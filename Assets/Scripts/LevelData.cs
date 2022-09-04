@@ -7,6 +7,8 @@ public class LevelData : ScriptableObject
 {
     [SerializeField] float _timeLimit = 10f;
     [SerializeField] GameObject _levelPrefab = null;
+    [SerializeField] Sprite _qrCode = null;
+    
     
     public float TimeLimit => _timeLimit;
 

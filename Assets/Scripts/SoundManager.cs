@@ -262,7 +262,8 @@ public enum Sound
 {
     StartUp,
     LightMove,
-    Beauty
+    Beauty,
+    Whistle
 }
 
 public enum Music

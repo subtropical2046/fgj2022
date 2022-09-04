@@ -61,10 +61,18 @@ public class LightController : MonoBehaviour
 
     private void FlashAndMoveToRandomPosition()
     {
-        SoundManager.Instance.Play(Sound.LightMove);
+        if(GameManager.Instance.Stage == GameStage.Play)
+        {
+            SoundManager.Instance.Play(Sound.LightMove);
+        }          
         _randomMoveSequence = DOTween.Sequence();
         Tweener flash = DOTween.To(() => _light.intensity, x => _light.intensity = x, 0.2f, 0.2f).SetLoops(4, LoopType.Yoyo);
-        Tweener move = transform.DOMove(GetRandomMovePosition(), lightControllerData.RandomMoveSpeed);
+        Tweener move = transform.DOMove(GetRandomMovePosition(), lightControllerData.RandomMoveSpeed).OnPlay(() => {
+            if (GameManager.Instance.Stage == GameStage.Play)
+            {
+                SoundManager.Instance.Play(Sound.LightMove);
+            }
+        });
         _randomMoveSequence.Append(flash);
         _randomMoveSequence.Append(move);
     }
@@ -74,6 +82,7 @@ public class LightController : MonoBehaviour
         //暫定tag為Attractor
         if (collision.CompareTag("Attractor"))
         {
+            SoundManager.Instance.Play(Sound.Whistle);
             _randomMoveSequence.Kill();
             _turnOnOffRandomMove = false;
             _light.intensity = _defaultLightIntensity;

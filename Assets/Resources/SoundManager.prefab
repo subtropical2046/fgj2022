@@ -57,6 +57,10 @@ MonoBehaviour:
     sound: 1
     volume: 1
     offset: 0
+  - clip: {fileID: 8300000, guid: 18559d8f24a24024aace57ea30af5204, type: 3}
+    sound: 3
+    volume: 0.747
+    offset: 0
   musicPlayer: {fileID: 3109420919187162990}
   musicList:
   - audioClip: {fileID: 8300000, guid: 6bbcc7a030bb93844a8db6a0ef5bc498, type: 3}
