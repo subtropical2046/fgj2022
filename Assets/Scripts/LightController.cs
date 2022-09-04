@@ -3,19 +3,28 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using DG.Tweening;
+using UnityEngine.Rendering.Universal;
 
 public class LightController : MonoBehaviour
 {
     [SerializeField] private CharacterControlManager _characterControlManager;
     [SerializeField] private Transform _playerTransform;
-
     [SerializeField] LightControllerData lightControllerData;
 
+    private Light2D _light;
+    private float _defaultLightIntensity;
+    private Sequence randomMoveSequence;
+
+    public void OnGameStart()
+    {
+        StartCoroutine(DecideRandomMove());
+    }
 
     private void Start()
     {
+        _light = GetComponent<Light2D>();
+        _defaultLightIntensity = _light.intensity;
         lightControllerData._tunrOnOffRandomMove = true;
-        StartCoroutine(DecideRandomMove());
     }
 
     private void FixedUpdate()
@@ -30,9 +39,18 @@ public class LightController : MonoBehaviour
             yield return new WaitForSeconds(lightControllerData._decideRandomMoveInterval);
             if (Random.Range(1, 101) <= lightControllerData._randomMoveRate)
             {
-                transform.DOMove(GetRandomMovePosition(), lightControllerData._randomMoveSpeed);
+                FlashAndMoveToRandomPos();
             }
         }
+    }
+
+    private void FlashAndMoveToRandomPos()
+    {
+        randomMoveSequence = DOTween.Sequence();
+        Tweener flash = DOTween.To(() => _light.intensity, x => _light.intensity = x, 0.2f, 0.2f).SetLoops(4, LoopType.Yoyo);
+        Tweener move = transform.DOMove(GetRandomMovePosition(), lightControllerData._randomMoveSpeed);
+        randomMoveSequence.Append(flash);
+        randomMoveSequence.Append(move);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -40,8 +58,8 @@ public class LightController : MonoBehaviour
         //暫定tag為Attractor
         if (collision.CompareTag("Attractor"))
         {
-            Debug.Log("OnTriggerEnter2D");
-            DOTween.KillAll();
+            randomMoveSequence.Kill();
+            _light.intensity = _defaultLightIntensity;
             transform.DOMove(collision.transform.position, lightControllerData._attractedMoveSpeed);
         }
     }
