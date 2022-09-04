@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PlayerControl
@@ -10,11 +11,14 @@ namespace PlayerControl
 
         private Coroutine _walkingSpriteChangingCoroutine;
 
-        private int _idleState = Animator.StringToHash("Idle");
-        private int _walkingState = Animator.StringToHash("Walking");
-        private int _stuckState = Animator.StringToHash("Stuck");
-        private int _fallState = Animator.StringToHash("Fall");
-        private int _drunkState = Animator.StringToHash("Drunk");
+        private readonly int _idleState = Animator.StringToHash("Idle");
+        private readonly int _walkingForward = Animator.StringToHash("WalkingForward");
+        private readonly int _walkingBackward = Animator.StringToHash("WalkingBackward");
+        private readonly int _walkingLeft = Animator.StringToHash("WalkingLeft");
+        private readonly int _walkingRight = Animator.StringToHash("WalkingRight");
+        private readonly int _stuckState = Animator.StringToHash("Stuck");
+        private readonly int _fallState = Animator.StringToHash("Fall");
+        private readonly int _drunkState = Animator.StringToHash("Drunk");
 
         public PlayerSpriteControlCore(
             IPlayerSpriteControlTarget target, Animator animator)
@@ -37,14 +41,31 @@ namespace PlayerControl
                     Player.State.Drunk => _drunkState,
                     Player.State.Stuck => _stuckState
                 };
-                Debug.Log(targetAnimation);
                 _animator.Play(targetAnimation);
+            } else {
+                _walkingSpriteChangingCoroutine =
+                    _controlTarget.StartCoroutine(
+                        WalkingSpriteChangingCoroutine());
             }
         }
 
-        private IEnumerator WalkingSpriteChangingCoroutine(Player.State state)
+        private IEnumerator WalkingSpriteChangingCoroutine()
         {
             while (true) {
+                var movingDirection = _controlTarget.GetMovingDirection();
+                var degree = Vector2.SignedAngle(Vector2.up, movingDirection);
+                var animationState =
+                    Mathf.Approximately(movingDirection.magnitude, 0)
+                        ? _idleState
+                        : degree switch {
+                            > -45 and <= 45 => _walkingBackward,
+                            > 45 and <= 135 => _walkingLeft,
+                            > -135 and <= -45 => _walkingRight,
+                            _ => _walkingForward
+                        };
+
+                _animator.Play(animationState);
+                yield return new WaitForSeconds(0.1f);
             }
         }
     }
@@ -53,6 +74,6 @@ namespace PlayerControl
     {
         public Coroutine StartCoroutine(IEnumerator coroutine);
         public void StopCoroutine(Coroutine coroutine);
-        public Vector2 GetVelocity();
+        public Vector2 GetMovingDirection();
     }
 }

@@ -130,7 +130,7 @@ public class Player : MonoBehaviour, IPlayerSpriteControlTarget
 
     #region IPlayerSpriteControlTarget
 
-    public Vector2 GetVelocity() => _characterControlManager.MovingDirection;
+    public Vector2 GetMovingDirection() => _characterControlManager.MovingDirection;
 
     #endregion
 }
