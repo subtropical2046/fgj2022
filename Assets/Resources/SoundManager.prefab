@@ -51,15 +51,15 @@ MonoBehaviour:
   soundList:
   - clip: {fileID: 8300000, guid: 819886ccc32ebea4abc77a79efc12a86, type: 3}
     sound: 0
-    volume: 1
+    volume: 0.9
     offset: 0
   - clip: {fileID: 8300000, guid: 367bf2e057454154fbfda88ac1be1a2c, type: 3}
     sound: 1
-    volume: 1
+    volume: 0.75
     offset: 0
   - clip: {fileID: 8300000, guid: 18559d8f24a24024aace57ea30af5204, type: 3}
     sound: 3
-    volume: 0.747
+    volume: 0.599
     offset: 0
   - clip: {fileID: 8300000, guid: b8b9e10b24628bb42bfe6941e93b143e, type: 3}
     sound: 4
@@ -67,7 +67,7 @@ MonoBehaviour:
     offset: 0
   - clip: {fileID: 8300000, guid: e282d06182f22f2488d40cbb38a82b06, type: 3}
     sound: 5
-    volume: 1
+    volume: 0.85
     offset: 0
   musicPlayer: {fileID: 3109420919187162990}
   musicList:
@@ -83,12 +83,12 @@ MonoBehaviour:
     fadeOut: 0
   - audioClip: {fileID: 8300000, guid: 0541bd7cc616dc24bbbdf125280a6ea6, type: 3}
     music: 4
-    volume: 1
+    volume: 0.85
     fadeIn: 0
     fadeOut: 0
   - audioClip: {fileID: 8300000, guid: 708c4beddd882194f9eee9041072fc4b, type: 3}
     music: 3
-    volume: 1
+    volume: 0.9
     fadeIn: 0
     fadeOut: 0
   maxVolume: {fileID: -9106453701081966343, guid: c82ea7d8d25969648a0d6ce2cf5eb892, type: 2}
@@ -99,8 +99,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 4e906bfeb6c5522408eaffcc4694b57e, type: 3}
     - {fileID: 8300000, guid: 3590da7be02f539418838f3905afbf21, type: 3}
     - {fileID: 8300000, guid: c3edead9af759764f93e29a748c21ebd, type: 3}
-    - {fileID: 8300000, guid: 23de2c4c5dc77f44cb9edef0a971bbd3, type: 3}
-    - {fileID: 8300000, guid: d1ed934a9090b664496017ab314690d6, type: 3}
+    - {fileID: 8300000, guid: a1512d24e85c2ab408b49e2a26e3dd8d, type: 3}
     sound: 2
     volume: 1
     fadeIn: 0
@@ -110,7 +109,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: eaca278203f2d524c8276d0560ef54ef, type: 3}
     - {fileID: 8300000, guid: 43d7d557445bcf947b7ef5275d0f7d88, type: 3}
     sound: 6
-    volume: 1
+    volume: 0.9
     fadeIn: 0
     fadeOut: 0
 --- !u!82 &3109420919183503475
