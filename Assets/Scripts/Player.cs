@@ -92,6 +92,7 @@ public class Player : MonoBehaviour, IPlayerSpriteControlTarget
         ChangeState(State.Fall);
 
         var curPosition = _rigidbody.position;
+        var movingDirection = _characterControlManager.MovingDirection;
 
         _cameraShake.StartShake();
 
@@ -99,7 +100,7 @@ public class Player : MonoBehaviour, IPlayerSpriteControlTarget
             .Append(
                 _rigidbody.DOMove(
                     curPosition +
-                    _characterControlManager.MovingDirection *
+                    movingDirection *
                     _data.FallControlData.FallDistance,
                     _data.FallControlData.FallPeriod))
             .AppendInterval(_data.FallControlData.FallIdlePeriod)

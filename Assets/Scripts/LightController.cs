@@ -26,6 +26,15 @@ public class LightController : MonoBehaviour
         _light = GetComponent<Light2D>();
         _defaultLightIntensity = _light.intensity;
         _turnOnOffRandomMove = lightControllerData.TunrOnOffRandomMove;
+        GameManager.Instance.OnGameStageChanged += StageChanged;
+    }
+
+    private void StageChanged(GameStage stage)
+    {
+        if(stage == GameStage.Play)
+        {
+            OnGameStart();
+        }
     }
 
     private void FixedUpdate()
@@ -78,5 +87,9 @@ public class LightController : MonoBehaviour
         int y = Random.Range(-5, 6);
         Vector2 returnPos = (Vector2)_playerTransform.position + new Vector2(x, y);
         return returnPos;
+    }
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameStageChanged -= StageChanged;
     }
 }

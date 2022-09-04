@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tunrOnOffRandomMove: 1
   _decideRandomMoveInterval: 8
-  _randomMoveRate: 50
+  _randomMoveRate: 100
   _randomMoveSpeed: 1
   _attractedMoveSpeed: 1
