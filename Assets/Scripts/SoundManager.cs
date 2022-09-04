@@ -34,7 +34,8 @@ public class SoundManager : MonoBehaviour
     Coroutine prevenPlayback;
 
     /// <summary>用於播放需要大量細微變化的聲音(ex.腳步聲)</summary>
-    List<SoundPack> collectedSounds = new List<SoundPack>();
+    Dictionary<Sound, RandomSoundPack> randomSoundBank = new Dictionary<Sound, RandomSoundPack>();
+    [SerializeField] List<RandomSoundPack> randomSoundList = new List<RandomSoundPack>();
 
     bool hasSubscribeSceneChange = false;
 
@@ -54,6 +55,12 @@ public class SoundManager : MonoBehaviour
         {
             soundBank.Add(s.sound, s);
         }
+        // 初始化隨機音效
+        randomSoundBank.Clear();
+        foreach(RandomSoundPack r in randomSoundList)
+        {
+            randomSoundBank.Add(r.sound, r);
+        }
         //初始化音樂庫
         musicBank.Clear();
         foreach (MusicPack m in musicList)
@@ -65,46 +72,68 @@ public class SoundManager : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneManager.activeSceneChanged += OnSceneChanged;
+        //SceneManager.activeSceneChanged += OnSceneChanged;
+        GameManager.Instance.OnGameStageChanged += StageChanged;
         hasSubscribeSceneChange = true;
     }
 
-    private void OnSceneChanged(Scene oldScene, Scene newScene)
+    private void StageChanged(GameStage stage)
     {
-        if (isMute)
-            return;
-
-        isPreventPlayback = false;
-        if (prevenPlayback != null)
-            StopCoroutine(prevenPlayback);
-
-        MuiscTransition(newScene);
-
+        switch (stage)
+        {
+            case GameStage.Start:
+                StartCoroutine(PlayMusic(Music.Opening));
+                
+                break;
+            case GameStage.Play:
+                Play(Sound.StartUp);
+                StartCoroutine(PlayMusic(Music.MainGame));
+                break;
+            case GameStage.Lose:
+                StartCoroutine(PlayMusic(Music.Lose));
+                break;
+            case GameStage.Win:
+                StartCoroutine(PlayMusic(Music.Win));
+                break;
+        }
     }
+
+    //private void OnSceneChanged(Scene oldScene, Scene newScene)
+    //{
+    //    if (isMute)
+    //        return;
+
+    //    isPreventPlayback = false;
+    //    if (prevenPlayback != null)
+    //        StopCoroutine(prevenPlayback);
+
+    //    MuiscTransition(newScene);
+
+    //}
 
     #region 音樂
 
-    private void MuiscTransition(Scene newScene)
-    {
-        maxVolume.TransitionTo(0f);
-        //場景的數值須依專案調整 (目前遊戲開始於場景4)
-        int mainGameScene = 4;
-        if (newScene.buildIndex >= mainGameScene && currentMusic != Music.MainGame)
-        {
-            StartCoroutine(PlayMusic(Music.MainGame));
-            currentMusic = Music.MainGame;
-        }
-        else if (newScene.buildIndex < mainGameScene && currentMusic != Music.Menu)
-        {
-            StartCoroutine(PlayMusic(Music.Menu));
-            currentMusic = Music.Menu;
-        }
+    //private void MuiscTransition(Scene newScene)
+    //{
+    //    maxVolume.TransitionTo(0f);
+    //    //場景的數值須依專案調整 (目前遊戲開始於場景4)
+    //    int mainGameScene = 4;
+    //    if (newScene.buildIndex >= mainGameScene && currentMusic != Music.MainGame)
+    //    {
+    //        StartCoroutine(PlayMusic(Music.MainGame));
+    //        currentMusic = Music.MainGame;
+    //    }
+    //    else if (newScene.buildIndex < mainGameScene && currentMusic != Music.Menu)
+    //    {
+    //        StartCoroutine(PlayMusic(Music.Menu));
+    //        currentMusic = Music.Menu;
+    //    }
 
-        if (newScene.name == "GameOver")
-        {
-            StopMusic(currentMusic);
-        }
-    }
+    //    if (newScene.name == "GameOver")
+    //    {
+    //        StopMusic(currentMusic);
+    //    }
+    //}
 
     IEnumerator PlayMusic(Music music)
     {
@@ -144,6 +173,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="sound"></param>
     public void Play(Sound sound)
     {
+        Debug.Log(sound.ToString());
         StartCoroutine(PlayOnce(sound,0.1f));
     }
 
@@ -171,7 +201,6 @@ public class SoundManager : MonoBehaviour
 
     private IEnumerator PlayOnce(Sound sound,float preventTime = 0.1f)
     {
-        Debug.Log("Play " + sound.ToString() + " " + prevenPlayback);
         sfxPlayer.clip = null;
         yield return new WaitForSeconds(soundBank[sound].offset);
         if (isPreventPlayback)
@@ -188,6 +217,11 @@ public class SoundManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(soundBank[sound].clip, pos, soundBank[sound].volume);
     }
 
+    public void PlayRandomSound(Sound sound)
+    {
+        int index = UnityEngine.Random.Range(0, randomSoundBank[sound].audioClip.Length);
+        sfxPlayer.PlayOneShot(randomSoundBank[sound].audioClip[index], randomSoundBank[sound].volume);
+    }
 
     /// <summary>
     /// 播放UI音效
@@ -199,10 +233,6 @@ public class SoundManager : MonoBehaviour
         sfxPlayer.Play();
     }
 
-    private void PlayRandomizedSound(Sound sound)
-    {
-
-    }
 
     private void Stop(Sound sound)
     {
@@ -220,8 +250,8 @@ public class SoundManager : MonoBehaviour
 
     private void OnDisable()
     {
-        if (hasSubscribeSceneChange)
-            SceneManager.activeSceneChanged -= OnSceneChanged;
+        //if (hasSubscribeSceneChange)
+        //    SceneManager.activeSceneChanged -= OnSceneChanged;
     }
 
 }
@@ -230,22 +260,19 @@ public class SoundManager : MonoBehaviour
 
 public enum Sound
 {
-    DoorPass,
-    DoorPortal,
-    GetStar,
-    SwitchClose,
-    Die,
-    Jump,
-    UI_Click = 100,
-    UI_Return = 101,
-    UI_ScrollingSelect = 102,
+    StartUp,
+    LightMove,
+    Beauty
 }
 
 public enum Music
 {
     None,
+    Opening,
     MainGame,
-    Menu
+    Win,
+    Lose
+    
 }
 
 
@@ -263,6 +290,16 @@ public struct MusicPack
 {
     public AudioClip audioClip;
     public Music music;
+    [Range(0f, 1f)] public float volume;
+    public float fadeIn;
+    public float fadeOut;
+}
+
+[System.Serializable]
+public struct RandomSoundPack
+{
+    public AudioClip[] audioClip;
+    public Sound sound;
     [Range(0f, 1f)] public float volume;
     public float fadeIn;
     public float fadeOut;

@@ -61,6 +61,7 @@ public class LightController : MonoBehaviour
 
     private void FlashAndMoveToRandomPosition()
     {
+        SoundManager.Instance.Play(Sound.LightMove);
         _randomMoveSequence = DOTween.Sequence();
         Tweener flash = DOTween.To(() => _light.intensity, x => _light.intensity = x, 0.2f, 0.2f).SetLoops(4, LoopType.Yoyo);
         Tweener move = transform.DOMove(GetRandomMovePosition(), lightControllerData.RandomMoveSpeed);
