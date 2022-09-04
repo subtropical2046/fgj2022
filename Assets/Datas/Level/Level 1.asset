@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca6e4db2807728d4dadcf030cdd1fd2a, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  _timeLimit: 45
+  _timeLimit: 300
   _levelPrefab: {fileID: 5224032016516041144, guid: 151cba0e9b18e8348bf44e68df1eeb0d, type: 3}
