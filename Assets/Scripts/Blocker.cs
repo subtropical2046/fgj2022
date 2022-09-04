@@ -21,6 +21,7 @@ public class Blocker : MonoBehaviour
             _playerPos = collision.gameObject.transform.position;
             _triggered = true;
             DoBlock();
+            SoundManager.Instance.PlayRandomSound(Sound.Monster);
         }
     }
 

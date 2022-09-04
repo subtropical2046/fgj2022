@@ -61,6 +61,14 @@ MonoBehaviour:
     sound: 3
     volume: 0.747
     offset: 0
+  - clip: {fileID: 8300000, guid: b8b9e10b24628bb42bfe6941e93b143e, type: 3}
+    sound: 4
+    volume: 1
+    offset: 0
+  - clip: {fileID: 8300000, guid: e282d06182f22f2488d40cbb38a82b06, type: 3}
+    sound: 5
+    volume: 1
+    offset: 0
   musicPlayer: {fileID: 3109420919187162990}
   musicList:
   - audioClip: {fileID: 8300000, guid: 6bbcc7a030bb93844a8db6a0ef5bc498, type: 3}
@@ -78,6 +86,11 @@ MonoBehaviour:
     volume: 1
     fadeIn: 0
     fadeOut: 0
+  - audioClip: {fileID: 8300000, guid: 708c4beddd882194f9eee9041072fc4b, type: 3}
+    music: 3
+    volume: 1
+    fadeIn: 0
+    fadeOut: 0
   maxVolume: {fileID: -9106453701081966343, guid: c82ea7d8d25969648a0d6ce2cf5eb892, type: 2}
   minVolume: {fileID: -5269066377399981018, guid: c82ea7d8d25969648a0d6ce2cf5eb892, type: 2}
   randomSoundList:
@@ -89,6 +102,14 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 23de2c4c5dc77f44cb9edef0a971bbd3, type: 3}
     - {fileID: 8300000, guid: d1ed934a9090b664496017ab314690d6, type: 3}
     sound: 2
+    volume: 1
+    fadeIn: 0
+    fadeOut: 0
+  - audioClip:
+    - {fileID: 8300000, guid: fb737bfd25c3f704d9b4a7af4ddff94c, type: 3}
+    - {fileID: 8300000, guid: eaca278203f2d524c8276d0560ef54ef, type: 3}
+    - {fileID: 8300000, guid: 43d7d557445bcf947b7ef5275d0f7d88, type: 3}
+    sound: 6
     volume: 1
     fadeIn: 0
     fadeOut: 0
