@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3109420919187162985}
   m_Father: {fileID: 0}
@@ -47,11 +48,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMute: 0
   sfxPlayer: {fileID: 3109420919183503475}
-  soundList: []
+  soundList:
+  - clip: {fileID: 8300000, guid: 819886ccc32ebea4abc77a79efc12a86, type: 3}
+    sound: 0
+    volume: 1
+    offset: 0
+  - clip: {fileID: 8300000, guid: 367bf2e057454154fbfda88ac1be1a2c, type: 3}
+    sound: 1
+    volume: 1
+    offset: 0
+  - clip: {fileID: 8300000, guid: 18559d8f24a24024aace57ea30af5204, type: 3}
+    sound: 3
+    volume: 0.747
+    offset: 0
   musicPlayer: {fileID: 3109420919187162990}
-  musicList: []
+  musicList:
+  - audioClip: {fileID: 8300000, guid: 6bbcc7a030bb93844a8db6a0ef5bc498, type: 3}
+    music: 1
+    volume: 1
+    fadeIn: 0
+    fadeOut: 0
+  - audioClip: {fileID: 8300000, guid: 3a5e0ac88f0782141834dd156e493645, type: 3}
+    music: 2
+    volume: 0.45
+    fadeIn: 1
+    fadeOut: 0
+  - audioClip: {fileID: 8300000, guid: 0541bd7cc616dc24bbbdf125280a6ea6, type: 3}
+    music: 4
+    volume: 1
+    fadeIn: 0
+    fadeOut: 0
   maxVolume: {fileID: -9106453701081966343, guid: c82ea7d8d25969648a0d6ce2cf5eb892, type: 2}
   minVolume: {fileID: -5269066377399981018, guid: c82ea7d8d25969648a0d6ce2cf5eb892, type: 2}
+  randomSoundList:
+  - audioClip:
+    - {fileID: 8300000, guid: 5f153bafa1f0f50468409ef04564f336, type: 3}
+    - {fileID: 8300000, guid: 4e906bfeb6c5522408eaffcc4694b57e, type: 3}
+    - {fileID: 8300000, guid: 3590da7be02f539418838f3905afbf21, type: 3}
+    - {fileID: 8300000, guid: c3edead9af759764f93e29a748c21ebd, type: 3}
+    - {fileID: 8300000, guid: 23de2c4c5dc77f44cb9edef0a971bbd3, type: 3}
+    - {fileID: 8300000, guid: d1ed934a9090b664496017ab314690d6, type: 3}
+    sound: 2
+    volume: 1
+    fadeIn: 0
+    fadeOut: 0
 --- !u!82 &3109420919183503475
 AudioSource:
   m_ObjectHideFlags: 0
@@ -175,6 +215,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3109420919183503373}
   m_RootOrder: 0
