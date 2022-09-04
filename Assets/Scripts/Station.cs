@@ -14,7 +14,7 @@ public class Station : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "Player" && GameManager.Instance.Stage == GameStage.Play)
         {
             GameManager.Instance.Win();
         }

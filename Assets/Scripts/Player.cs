@@ -4,11 +4,11 @@ using PlayerControl;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IPlayerSpriteControlTarget
 {
     #region Enum
 
-    private enum State
+    public enum State
     {
         Idle,
         Walking,
@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Rigidbody2D _rigidbody;
     [SerializeField]
+    private Animator _animator;
+    [SerializeField]
     private SpriteRenderer _spriteRenderer;
 
     #endregion
@@ -35,12 +37,15 @@ public class Player : MonoBehaviour
     #region Private Members
 
     private State _state = State.Idle;
+    private PlayerSpriteControlCore _spriteControlCore;
     private DrunkControlCore _drunkControlCore;
 
     #endregion
 
     private void Start()
     {
+        _spriteControlCore =
+            new PlayerSpriteControlCore(this, _animator);
         _drunkControlCore =
             new DrunkControlCore(this, _data.DrunkControlData, OnDrunk);
         GameManager.Instance.OnGameStageChanged += OnGameStageChanged;
@@ -71,6 +76,10 @@ public class Player : MonoBehaviour
 
     private void OnDrunk(bool isDrunk)
     {
+        if ((isDrunk && _state != State.Walking)
+            || (!isDrunk && _state != State.Drunk))
+            return;
+
         ChangeState(isDrunk ? State.Drunk : State.Walking);
         // TODO Change to animation control
         _spriteRenderer.DOColor(isDrunk ? Color.red : Color.white, 0.2f);
@@ -103,6 +112,12 @@ public class Player : MonoBehaviour
             .OnComplete(() => ChangeState(State.Walking));
     }
 
+    private void ChangeState(State state)
+    {
+        _state = state;
+        _spriteControlCore.ChangeSprite(state);
+    }
+
     private void FixedUpdate()
     {
         if (_state != State.Walking)
@@ -113,8 +128,9 @@ public class Player : MonoBehaviour
             _characterControlManager.GetDeltaPosition(Time.deltaTime));
     }
 
-    private void ChangeState(State state)
-    {
-        _state = state;
-    }
+    #region IPlayerSpriteControlTarget
+
+    public Vector2 GetMovingDirection() => _characterControlManager.MovingDirection;
+
+    #endregion
 }
