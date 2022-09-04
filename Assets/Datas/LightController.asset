@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LightController
   m_EditorClassIdentifier: 
   _tunrOnOffRandomMove: 1
-  _decideRandomMoveInterval: 5
-  _randomMoveRate: 40
-  _randomMoveSpeed: 2
-  _attractedMoveSpeed: 2
+  _decideRandomMoveInterval: 8
+  _randomMoveRate: 50
+  _randomMoveSpeed: 1
+  _attractedMoveSpeed: 1

@@ -7,6 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    public static void Init()
+    {
+        GameObject.DontDestroyOnLoad(GameObject.Instantiate(Resources.Load("GameManager")));
+    }
+
     public static GameManager Instance;
 
     public event Action<GameStage> OnGameStageChanged;
