@@ -6,5 +6,9 @@ using UnityEngine;
 public class LevelData : ScriptableObject
 {
     [SerializeField] float _timeLimit = 10f;
+    [SerializeField] GameObject _levelPrefab = null;
+    
     public float TimeLimit => _timeLimit;
+
+    public GameObject LevelPrefab => _levelPrefab;
 }
