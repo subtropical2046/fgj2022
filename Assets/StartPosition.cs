@@ -6,7 +6,7 @@ public class StartPosition : MonoBehaviour
 {
     [SerializeField] Transform _player = null;
     [SerializeField] Transform _light = null;
-    void Start()
+    void Awake()
     {
         GameManager.Instance.OnGameStageChanged += StageChanged;
     }
@@ -19,7 +19,6 @@ public class StartPosition : MonoBehaviour
             Vector2 pos = transform.GetChild(Random.Range(0, transform.childCount)).position;
             _player.position = pos;
             _light.position = pos;
-            Debug.Log("sETpOS");
         }
     }
 
